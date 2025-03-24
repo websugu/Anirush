@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Settings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    /* Reset Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #010107;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Main Container */
+.container {
+    width: 90%;
+    max-width: 500px;
+}
+
+/* Profile Header */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #252525;
+}
+
+/* Sections */
+.section {
+    margin-bottom: 20px;
+}
+
+.section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Details */
+.detail {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0px;
+    border-bottom: 1px solid #252525;
+}
+.detail small{
+    color: #666;
+}
+.dtl-1{
+    color: #b8b8b8;
+    font-size: 16px;
+}
+.dtl-1 span{
+    padding-left: 10px;
+}
+.detail a {
+    color: #04AA6D;
+    text-decoration: none;
+}
+
+.detail a:hover {
+    text-decoration: underline;
+}
+
+/* Delete Account */
+.logout button {
+    background-image: linear-gradient(to bottom right,#1581cf, #0c53af);
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.Ctn-watch button{
+    background:none;
+    font-size: 16px;
+    font-weight: 600;
+    border: 1px solid;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+    color: white;
+    cursor: pointer;
+}
+/* Responsive Design */
+@media (max-width: 486px) {
+    body {
+    background: #010107;
+    color: #fff;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+    .container {
+    width: 90%;
+    max-width: 500px;
+    margin: auto;
+
+}
+
+/* Profile Header */
+.profile-header {
+    display: block;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #252525;
+    margin-bottom: 20px;
+}
+.logout button {
+   margin-top: 50px;
+   color: white;
+   padding: 13px;
+}
+.Ctn-watch button{
+    padding: 13px;
+}
+.detail {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 0px;
+    border-bottom: 1px solid #252525;
+}
+}
+
+</style>
+<body>
+    <div class="container">
+        <div class="profile-header">
+            <img src="https://i.pinimg.com/736x/54/e6/51/54e6517bfb2ee3cac290dc6500c89719.jpg" class="profile-pic" id="profileImage" alt="Profile Image">
+            <div class="profile-info">
+                <h2 id="profileNameDisplay" ></h2>
+                <p id="emailDisplay"></p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Personal details</h3>
+            <div class="detail">
+                <div class="dtl-1">
+                    <i class="fa-solid fa-list"></i> <span> My Watch Lists</span>
+                </div>
+                
+                <div>
+                    <i class="fa-solid fa-angle-right"></i>
+                </div>
+            </div>
+            <div class="detail">
+                <div class="dtl-1">
+                    <i class="fa-regular fa-heart"></i> <span> Liked Videos On Anirush</span>
+                </div>
+                
+                <div>
+                    <i class="fa-solid fa-angle-right"></i>
+                </div>
+            </div>
+            <div class="detail">
+                <div class="dtl-1">
+                    <i class="fa-solid fa-repeat"></i> <span> Switch My Account</span>
+                </div>
+                
+                <div>
+                    <i class="fa-solid fa-angle-right"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="logout">
+           <button id="logoutButton">LOGOUT</button>
+        </div>
+        <div class="Ctn-watch">
+            <button  onclick="backToAnimes()">CONTINUE WATCHING</button>
+         </div>
+    </div>
+
+    <script type="module" src="scripts/profile.js"></script>
+    <script>
+        function backToAnimes() {
+            window.location.href = "animes.html";
+        }
+    </script>
+</body>
+</html>

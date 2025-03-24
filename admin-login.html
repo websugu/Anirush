@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="assets/css/admin-login.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Admin Login</h2>
+        <input type="email" id="adminEmail" placeholder="Email" required>
+        <input type="password" id="adminPassword" placeholder="Password" required>
+        <input type="password" id="adminUID" placeholder="Enter User UID" required>
+        <button onclick="loginAdmin()">Login</button>
+        <p id="loginMessage"></p>
+    </div>
+
+    <script type="module">
+        // Firebase imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCiD7_1letMuZHrReMjUDoA-m32zYvRDO4",
+            authDomain: "insta-clone-7a44a.firebaseapp.com",
+            projectId: "insta-clone-7a44a",
+            storageBucket: "insta-clone-7a44a.appspot.com",
+            messagingSenderId: "697215567024",
+            appId: "1:697215567024:web:a48df90a4842a1d96c6775",
+            measurementId: "G-M076ZMB5K9"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Admin login function
+        window.loginAdmin = async function () {
+            const email = document.getElementById("adminEmail").value;
+            const password = document.getElementById("adminPassword").value;
+            const adminUID = document.getElementById("adminUID").value;
+            const loginMessage = document.getElementById("loginMessage");
+
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // Check if UID matches
+                if (user.uid === adminUID) {
+                    loginMessage.textContent = "Login successful!";
+                    loginMessage.style.color = "green";
+                    window.location.href = "admin.html"; // Redirect to admin page
+                } else {
+                    loginMessage.textContent = "Access denied: Invalid UID.";
+                    loginMessage.style.color = "red";
+                    await auth.signOut(); // Sign out the user if UID does not match
+                }
+            } catch (error) {
+                loginMessage.textContent = "Login failed: " + error.message;
+                loginMessage.style.color = "red";
+            }
+        };
+
+        // Check admin authentication state
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                console.log("Admin logged in:", user.email);
+            } else {
+                console.log("No admin logged in.");
+            }
+        });
+    </script>
+</body>
+</html>

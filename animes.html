@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Streaming</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <div class="nav-2">
+                <div style="display: flex;align-items: center;">
+                    <div class="logo">
+                        <img src="images/watch-page-logo.png" alt="" width="20">
+                    </div>
+                    <ul class="nav-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Movies</a></li>
+                    </ul>
+                </div>
+                <div style="display: flex;align-items: center;gap: 20px;">
+                    <div class="search-container">
+                        <input type="text" id="animeSearch" placeholder="Search for an anime..." onkeyup="searchAnime()" />
+                        <button id="cancelSearchBtn" onclick="cancelSearch()"><i class="fa-solid fa-xmark"></i></button>
+                        <div id="suggestionList" class="suggestion-list"></div>
+                    </div>
+                    <div class="user-fit">
+                        <i class="fa-regular fa-user"></i>
+                    </div>
+                <div class="hamburger"><i class="fa-regular fa-user"></i></div>
+                </div>
+            </div>
+           
+            
+        </nav>
+    </header>
+
+    <!-- Mobile Slide-Up Menu -->
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Movies</a></li>
+            <li><a href="#">TV Shows</a></li>
+            
+        </ul>
+        <button id="loginButton" onclick="openAuthPage()">ACCOUNT</button>
+        <button>Close</button>
+    </div>
+    <!-- <section class="hero">
+        <div>
+            <div class="hero-content">
+                <div class="head-news">
+                    <div>
+                        <h1>Raya and the Last Dragon</h1>
+                        <p>A Disney Original Film - 88% Match - 2021</p>
+                        <button class="play-btn">▶ Play Now</button>
+                    </div>
+            
+                    <div>
+                        <img src="https://i.pinimg.com/736x/9e/5f/c1/9e5fc1e564b93218251cbd4b404d1cfb.jpg" width="100">
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </section> -->
+    <section class="animes">
+        <h2>DISCOVER ANIME</h2>
+        <div >
+            <div class="anime-container" id="animeList"></div>
+        </div>
+    </section>
+    <script type="module" src="scripts/animes.js"></script>
+    <script>
+        function openAuthPage() {
+            window.location.href = "my-profile.html";
+        }
+    </script>
+    <script>
+   // Get menu elements
+const hamburger = document.querySelector(".hamburger");
+const mobileMenu = document.querySelector(".mobile-menu");
+const closeMenu = document.querySelector(".close-menu");
+
+// Show menu on click (slide up)
+hamburger.addEventListener("click", () => {
+    mobileMenu.classList.add("active"); // Adds the class that slides it up
+});
+
+// Hide menu on click (slide down)
+closeMenu.addEventListener("click", () => {
+    mobileMenu.classList.remove("active"); // Removes the class to slide it down
+});
+
+// Close menu if user clicks outside it
+window.addEventListener("click", (e) => {
+    if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+        mobileMenu.classList.remove("active");
+    }
+});
+
+    </script>
+</body>
+</html>
+
+
+

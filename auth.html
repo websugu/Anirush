@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Login Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    /* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #010107;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container */
+.container {
+    display: flex;
+    width: 80%;
+    background-color: #0f0e0e;
+    color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    height: 80vh;
+}
+
+/* Left Section (Image) */
+.image-section {
+    width: 50%;
+    position: relative;
+}
+
+.image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.886);
+}
+.overlay-text img{
+    width: 140px;
+}
+.overlay-text h2 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.overlay-text p {
+    font-size: 14px;
+    color: #bbb;
+}
+
+/* Right Section (Form) */
+.form-section {
+    width: 40%;
+    padding: 40px;
+    margin: auto;
+}
+
+.form-section h2 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.form-section h2 span {
+    color: #0ea5e9;
+}
+.form-section small a{
+    color: #0ea5e9;
+}
+/* Form Inputs */
+.upload-profile-btn{
+    background-image: linear-gradient(to bottom right,#1581cf, #0b438d);
+    padding: 2px 10px;
+    width: fit-content;
+    margin: auto;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 12px;
+}
+label {
+    font-size: 14px;
+    display: block;
+    margin-top: 10px;
+    color: #ddd;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    background-color: #3333339e;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: white;
+}
+
+input:focus {
+    border-color: #0ea5e9;
+    outline: none;
+}
+
+/* Checkbox */
+.checkbox {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    font-size: 12px;
+}
+
+.checkbox input {
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+}
+
+.checkbox label {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #bbb;
+}
+
+.checkbox a {
+    color: #0ea5e9;
+    text-decoration: none;
+}
+
+/* Register Button */
+button {
+    width: 100%;
+    background-image: linear-gradient(to bottom right,#1581cf, #0c53af);
+    color: #fff;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+.no-account{
+/* not yet */
+}
+/* Social Login */
+.social-login {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #bbb;
+}
+
+.social-login .icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.social-login .icons a {
+    background-color: #333;
+    padding:10px 10px;
+    margin: 5px;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.social-login .icons img {
+    width: 20px;
+    height: 20px;
+}
+
+.social-login .icons a:hover {
+    background-color: #444;
+}
+
+/* Login Link */
+.login-link {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.login-link a {
+    color: #0ea5e9;
+    text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        width: 100%;
+        background: none;
+    }
+
+    .image-section {
+        width: 100%;
+        height: 200px;
+        display: none; 
+    }
+
+    .form-section {
+        width: 100%;
+        background: none;
+    }
+
+    .overlay-text {
+        bottom: 10px;
+        left: 10px;
+    }
+}
+/* Hide the default checkbox */
+.checkbox input[type="checkbox"] {
+    display: none;
+}
+
+/* Custom checkbox design */
+.checkbox label {
+    display: flex;
+    align-items: center;
+    font-size: small;
+    cursor: pointer;
+    gap: 8px;
+    user-select: none;
+}
+
+/* Custom checkbox box */
+.checkbox label::before {
+    content: "";
+    width: 15px;
+    height: 15px;
+    border-radius: 4px;
+    border: 2px solid #0452aa; /* Checkbox border color */
+    display: inline-block;
+    transition: 0.3s;
+    background-color: transparent;
+}
+
+/* Checked state */
+.checkbox input[type="checkbox"]:checked + label::before {
+    background-color: #0452aa;
+    border-color: #17b8b8;
+    content: "✔"; /* Checkmark */
+    color: white;
+    font-size: 13px;
+    text-align: center;
+    line-height: 15px;
+    font-weight: bold;
+}
+
+/* Hover effect */
+.checkbox label:hover::before {
+    border-color: #17b8b8;
+}
+
+/* Focus effect */
+.checkbox input[type="checkbox"]:focus + label::before {
+    box-shadow: 0 0 4px rgba(4, 170, 109, 0.7);
+}
+
+/* Styling the Terms & Conditions link */
+
+
+</style>
+<body>
+
+    <div class="container">
+        <!-- Left Side (Image Section) -->
+        <div class="image-section">
+            <img src="https://i.pinimg.com/736x/b9/1f/a0/b91fa012fdd412b3a335034feb75d924.jpg" alt="Gaming Image">
+            <div class="overlay-text">
+                <h2>HI THERE!</h2>
+                <p>Join us and enjoy</p>
+            </div>
+        </div>
+
+        <!-- Right Side (Form Section) -->
+        <div class="form-section">
+            
+            <form action="#">
+                <div class="form-container" id="loginForm">
+                    <div style="text-align: center;cursor: pointer;" onclick="window.location.href='animes.html';">
+                        <img src="images/Anirush-3-10-2025 (1).png" alt="" width="150">
+                    </div>
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" placeholder="Email" required>
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" placeholder="Password" required>
+
+                    <div class="checkbox">
+                        <input type="checkbox" id="terms">
+                        <label for="terms">
+                            Send me Anirush info, <a href="#">News & Anime releases</a>
+                        </label>
+                    </div>
+    
+                    <button onclick="loginUser()">Login</button>
+                    <p id="loginMessage"></p>
+                    <div class="no-account">
+                        <small>Don't have an account? <a href="#" onclick="showRegister()">Register</a></small>
+                    </div>
+                    
+ 
+                </div>
+                
+                <div class="form-container" id="registerForm" style="display: none;">
+                    <div style="text-align: center;">
+                        <div id="previewContainer">
+                            <img id="previewImage" src="https://i.pinimg.com/736x/54/e6/51/54e6517bfb2ee3cac290dc6500c89719.jpg" style="width: 100px; height: 100px; border-radius: 50%;" alt="Profile Preview">
+                        </div>
+                        <div>
+                            <label for="profileImage" class="upload-profile-btn" style="margin-top: 8px;">Add Profile</label>
+                            <input type="file" id="profileImage" accept="image/*" onchange="previewProfileImage()" style="display: none;">  
+                        </div>
+                    </div>
+                    <label>Name</label>
+                    <input type="text" id="profileName" placeholder="Profile Name" required>
+                    <label>Email</label>
+                    <input type="email" id="registerEmail" placeholder="Email" required>
+                    <label>Password</label>
+                    <input type="password" id="registerPassword" placeholder="Password" required>
+                   
+                    <button onclick="registerUser()" style="margin-top: 10px;">Register</button>
+                    <p id="registerMessage"></p>
+                    <div class="no-account">
+                        <small>Already have an account? <a href="#" onclick="showLogin()">Login</a></small>
+                    </div>
+                    
+                </div>
+
+                
+
+                <div class="social-login">
+                    <div class="icons">
+                        <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111392.png"></a>
+                        <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733635.png"></a>
+                        <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111491.png"></a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <script type="module" src="scripts/auth.js"></script>
+    <script>
+        function previewProfileImage() {
+    const fileInput = document.getElementById("profileImage");
+    const previewImage = document.getElementById("previewImage");
+
+    const file = fileInput.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            previewImage.src = e.target.result;
+            previewImage.style.display = "block";
+            previewImage.style.margin = "auto";
+        };
+        reader.readAsDataURL(file);
+    } else {
+        previewImage.style.display = "none";
+    }
+}
+
+    </script>
+</body>
+</html>

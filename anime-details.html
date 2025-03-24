@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Details</title>
+    <link rel="stylesheet" href="assets/css/anime-details.css">
+    <script type="module" src="./scripts/anime-details.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <!-- Anime Details -->
+    <div class="header"> 
+        <div id="animeCover"></div>
+        <div class="anime-details">
+            <div>
+                <img id="animeImage" alt="Anime Image">
+            </div>
+            <div class="anime-details-texts">
+                <div class="ams">
+                    <h2 id="animeTitle" >Loading...</h2>
+                    <p id="animeDescription">
+                        Please wait while we fetch the anime details.
+                    </p>
+                </div>
+                <div>
+                    <button>START WATCHING NOW</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- Episodes List -->
+    <div class="episodes-section">
+        <div class="EP">
+            <div>
+                <h3>Available videos</h3>
+            </div>
+            <div>
+                <!-- Search Episode Number -->
+                <div class="search-episode-container">
+                    <input type="number" id="episodeNumberInput" class="search-episode-input" placeholder="Enter episode number">
+                    <button class="search-episode-button" onclick="searchEpisode()">Search</button>
+                </div>
+            </div>
+           
+        </div>
+        
+        
+        <ul id="episodesList" class="episodes-list">
+            <li class="no-episodes">Loading episodes...</li>
+        </ul>
+    </div>
+
+    <!-- Script -->
+    <script>
+        function goBack() {
+            window.location.href = "my-profile.html";
+        }
+
+        // Search Episode Function
+        function searchEpisode() {
+            const episodeNumber = document.getElementById("episodeNumberInput").value;
+            const episodesList = document.getElementById("episodesList").getElementsByTagName("li");
+
+            for (const episode of episodesList) {
+                const episodeTitle = episode.textContent || episode.innerText;
+                if (episodeTitle.includes(`Episode ${episodeNumber}`)) {
+                    episode.scrollIntoView({ behavior: "smooth", block: "center" });
+                    episode.style.backgroundColor = "#6d7986cb";
+                    setTimeout(() => {
+                        episode.style.backgroundColor = "";
+                    }, 1500);
+                    return;
+                }
+            }
+
+            alert(`Episode ${episodeNumber} not found.`);
+        }
+    </script>
+</body>
+</html>
