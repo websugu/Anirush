@@ -167,6 +167,23 @@ video {
     border-radius: 50%;
     cursor: pointer;
 }
+@media (max-width: 768px) {
+    #videoPlayer {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: black;
+    }
+
+    video {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* Prevents cropping */
+    }
+}
+
     </style>
 </head>
 <body>
@@ -305,14 +322,25 @@ function updateProgressBar() {
         } else if (videoPlayer.webkitRequestFullscreen) {
             videoPlayer.webkitRequestFullscreen(); // For Safari
         }
+
+        // Force Landscape Mode on Mobile
+        if (screen.orientation && screen.orientation.lock) {
+            screen.orientation.lock("landscape").catch(error => console.log("Orientation lock failed:", error));
+        }
     } else {
         if (document.exitFullscreen) {
             document.exitFullscreen();
         } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen(); // For Safari
+            document.webkitExitFullscreen();
+        }
+
+        // Unlock Screen Orientation
+        if (screen.orientation && screen.orientation.unlock) {
+            screen.orientation.unlock();
         }
     }
 }
+
 
 
         // Skip Forward 10 Seconds
@@ -326,6 +354,13 @@ function updateProgressBar() {
         }
         videoPlayer.addEventListener("click", () => {
     controls.classList.toggle("hidden");
+});
+window.addEventListener("orientationchange", () => {
+    if (window.matchMedia("(orientation: landscape)").matches) {
+        video.style.transform = "rotate(0deg)"; // Normal landscape mode
+    } else {
+        video.style.transform = "rotate(90deg)"; // Rotate for portrait mode
+    }
 });
 
         // Event Listeners
