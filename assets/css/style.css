@@ -1,0 +1,301 @@
+    /* General Styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #111;
+        color: white;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Navbar */
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px;
+        background: black;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 100;
+    }
+    .nav-2{
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
+        margin: auto;
+        padding: 7px 0px;
+    }
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+    }
+    
+    .nav-links a {
+        text-decoration: none;
+        color: white;
+    }
+    
+    /* Search Bar */
+    #animeSearch {
+        display: block;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #5e5e5eaf;;
+        width: 500px;
+        background: #5e5e5e37;
+        color: #fff;
+        font-size: 16px;
+        outline: none;
+        border-radius: 50px;
+    }
+    .search-container {
+        position: relative;
+    }
+    .suggestion-list {
+        position: absolute;
+        background-color: #010107;
+        max-height: 200px;
+        overflow-y: auto;
+        width: 100%;
+        z-index: 100;
+    }
+    .suggestion-item {
+        display: flex;
+        align-items: center;
+        padding: 8px;
+        cursor: pointer;
+    }
+    .suggestion-item:hover {
+        background-color: #22222488;
+    }
+    
+    .suggestion-item img {
+        margin-right: 8px;
+    }
+    #cancelSearchBtn {
+        position: absolute;
+        right:15px;
+        top: 8px;
+        background-color: transparent;
+        border: none;
+        font-size: 18px;
+        cursor: pointer;
+        color: #aaa;
+    }
+    
+    #cancelSearchBtn:hover {
+        color: #fff;
+    }
+    /* Profile Icon */
+    .user-fit {
+        font-size: 25px;
+        transition: transform 0.3s,box-shadow 0.3s;
+        cursor: pointer;
+    }.user-fit:hover {
+        transform: scale(1.03);
+        color: cornflowerblue;
+    }
+    .animes{
+        max-width: 90%;
+        margin: auto;
+    }
+    h2{
+        margin-top: 100px;
+    }
+    .anime-container{
+        display: grid;
+        grid-template-columns: repeat(auto-fit,minmax(250px, 1fr) );
+        gap: 25px;
+        justify-content: center;
+    }
+    .card {
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+    
+    }.card:hover{
+        transform: scale(1.01);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+    .card img{
+        width: 100%;
+    }
+    .card h3{
+        margin: 10px 0;
+        font-size: 16px;
+        text-align: left;
+        color: #b5b5b5;
+        font-weight: 300;
+    }
+    /* Hamburger Menu (Hidden on Desktop) */
+    .hamburger {
+        display: none;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    
+    /* Hero Section with Blur Background */
+    .hero {
+        position: relative;
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        overflow: hidden;
+        max-width: 100%;
+    }
+    
+    /* Blurred Background Effect */
+    .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('https://i.pinimg.com/736x/0e/a0/3f/0ea03f6cfeccdb8cf48e768cd3c3539a.jpg') no-repeat center center/cover;
+        filter: blur(10px); /* Apply blur effect */
+        z-index: -1; /* Send it behind the content */
+    }
+    
+    /* Hero Content */
+    .hero-content {
+        position: relative;
+        z-index: 1; /* Ensure text stays above the blurred background */
+        width: 100%;
+        background-color: aqua;
+    }
+    .head-news{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+    }
+    /* Play Button */
+    .play-btn {
+        background-color: #e50914;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        font-size: 18px;
+        cursor: pointer;
+    }
+    
+    /* Mobile Optimization */
+    @media screen and (max-width: 768px) {
+        .hero-content {
+            max-width: 90%;
+        }
+    }
+    
+    /* Mobile Slide-Up Menu */
+    .mobile-menu {
+        position: fixed;
+        bottom: -100%; /* Initially hidden */
+        left: 0;
+        width: 100%;
+        background: rgb(0, 0, 0);
+        padding: 20px;
+        text-align: center;
+        transition: bottom 0.4s ease-in-out;
+        z-index: 200;
+        height: 95vh;
+    }
+    
+    .mobile-menu.active {
+        bottom: 0; /* Slide up when active */
+    }
+    
+    .mobile-menu ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .mobile-menu ul li {
+        margin: 15px 0;
+    }
+    
+    .mobile-menu a {
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+    }
+    
+    .close-menu {
+        background-color: #e50914;
+        color: white;
+        border: none;
+        padding: 10px;
+        width: 100%;
+        cursor: pointer;
+    }
+    
+    /* Responsive: Show Hamburger */
+    @media screen and (max-width:575px){
+        .anime-container{
+        display: grid;
+        grid-template-columns: repeat(auto-fit,minmax(100px, 1fr) );
+        gap: 20px;
+        justify-content: center;
+    }
+    .card img{
+        width: 100%;
+    }
+    .card h3{
+        margin: 10px 0;
+        font-size: 10px;
+        text-align: left;
+        font-weight: 300;
+    }
+    h2{
+        margin-top: 100px;
+        font-weight: 18px;
+    }
+    .animes{
+        max-width: 90%;
+        margin-top: 100px;
+    }
+    }
+    @media screen and (max-width: 768px) {
+        .nav-links {
+            display: none;
+        }
+        .nav-2{
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        margin: auto;
+        padding: 15px 0px;
+    }
+        #animeSearch {
+        padding: 8px;
+        width: 300px;
+    }
+        .user-fit{
+            display: none;
+        }
+        .hamburger {
+            display: block;
+        }
+        /*  */
+    
+        h2{
+        margin-top: 70px;
+        font-weight: 18px;
+    }
+    #cancelSearchBtn {
+        position: absolute;
+        right:15px;
+        top: 8px;
+        background-color: transparent;
+        border: none;
+        font-size: 18px;
+        cursor: pointer;
+        color: #aaa;
+    }
+    
+    }

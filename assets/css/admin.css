@@ -1,0 +1,159 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-color: #1a1a1a;
+    color: #f9f9f9;
+}
+
+header {
+    background-color: #282828;
+    padding: 0px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+    font-size: 24px;
+    color: #f9f9f9;
+}
+
+header button {
+    padding: 10px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(to bottom right,#158bdf, #0e58b6);
+    /* background-color: rgb(255, 59, 92); */
+    border-radius: 8px;
+}
+
+header button:hover {
+    background-color: #a098981a;
+}
+
+/* Search Bar */
+.search-container {
+    margin: 20px;
+}
+
+#adminAnimeSearch {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #555;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+}
+
+/* Add Anime Button */
+#addAnimeBtn {
+    padding: 10px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    color: rgb(22, 22, 22);
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    margin: 10px;
+    
+}
+
+#addAnimeBtn:hover {
+    background-color: #0056b3;
+}
+
+/* Popup Style */
+.popup, .modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #333;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    max-width: 400px;
+    z-index: 1000;
+}
+
+.popup input, .popup textarea, .modal input {
+    width: 94%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background-color: #222;
+    color: #fff;
+}
+
+.popup button, .modal button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.popup button:hover, .modal button:hover {
+    background-color: #0056b3;
+}
+
+/* Table Style */
+table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+}
+
+th {
+    background-color: #333;
+}
+
+td {
+    background-color: #2a2a2a;
+}
+
+/* Modal Close Button */
+.close {
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.close:hover {
+    color: #ff6b6b;
+}
+
+td button{
+    padding: 10px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(to bottom right,#1581cf, #0c53af);
+    /* background-color: rgb(255, 59, 92); */
+    border-radius: 8px;
+    margin: 0px 5px;
+}td button:hover {
+    background-color: #c21e47;
+}
