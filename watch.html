@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Watch Episode</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
@@ -22,20 +20,25 @@
         
 
         /* Video Player Styling */
-        #videoPlayer {
-            position: relative;
-            width: 100%;
-            max-width: 100%;
-            height: 70vh;
-            overflow: hidden;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-        }
+       /* Video Player Styling */
+#videoPlayer {
+    position: relative;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    background: black;
+}
 
-        video {
-            width: 100%;
-            height: auto;
-            background: black;
-        }
+/* Make Video Fit Screen */
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Makes sure the video fills the container */
+    display: block;
+}
+
 
         /* Custom Controls */
         .controls {
@@ -171,7 +174,7 @@
 
     <!-- Video Player -->
     <div id="videoPlayer">
-        <video id="watchVideo"></video>
+        <video id="watchVideo" playsinline controlslist="nodownload nofullscreen noremoteplayback"></video>
 
         <!-- Gradient Overlay -->
         <div class="gradient-overlay" id="gradientOverlay">
@@ -231,17 +234,7 @@
         const gradientOverlay = document.getElementById("gradientOverlay");
         const controls = document.getElementById("controls");
         let controlsTimeout;
-    
-        // Lock screen orientation to portrait on mobile
-        if (screen.orientation && screen.orientation.lock) {
-            screen.orientation.lock("portrait").catch((err) => {
-                console.warn("Orientation lock failed:", err);
-            });
-        }
-    
-        // Remove default video player controls
-        video.controls = false;
-    
+
         // Toggle Controls Visibility
         function showControls() {
             controls.classList.remove("hidden");
@@ -250,23 +243,23 @@
                 if (!video.paused) controls.classList.add("hidden");
             }, 3000);
         }
-    
+
         // Mouse Move Event to Show Controls
         videoPlayer.addEventListener("mousemove", showControls);
-    
+
         // Show Controls When Paused
         video.addEventListener("pause", () => {
             controls.classList.remove("hidden");
             clearTimeout(controlsTimeout);
         });
-    
+
         // Format time in mm:ss
         function formatTime(seconds) {
             const min = Math.floor(seconds / 60);
             const sec = Math.floor(seconds % 60);
             return `${min.toString().padStart(2, "0")}:${sec.toString().padStart(2, "0")}`;
         }
-    
+
         // Play/Pause Toggle
         function togglePlayPause() {
             if (video.paused) {
@@ -279,49 +272,62 @@
                 gradientOverlay.classList.add("visible");
             }
         }
-    
+
         // Update Progress Bar
-        function updateProgressBar() {
-            const progress = (video.currentTime / video.duration) * 100;
-            progressBar.value = progress;
-            const current = formatTime(video.currentTime);
-            const duration = formatTime(video.duration);
-            timeDisplay.textContent = `${current} / ${duration}`;
+        // Update Progress Bar with Track Fill
+function updateProgressBar() {
+    const progress = (video.currentTime / video.duration) * 100;
+    progressBar.value = progress;
+    const current = formatTime(video.currentTime);
+    const duration = formatTime(video.duration);
+    timeDisplay.textContent = `${current} / ${duration}`;
     
-            // Update the progress bar background to fill as it plays
-            progressBar.style.background = `linear-gradient(to right, #153be7 ${progress}%, #d3d3d3 ${progress}%)`;
-        }
-    
+    // Update the progress bar background to fill as it plays
+    progressBar.style.background = `linear-gradient(to right, #153be7 ${progress}%, #d3d3d3 ${progress}%)`;
+}
+
+
         // Seek Video
         function seekVideo() {
             const time = (progressBar.value / 100) * video.duration;
             video.currentTime = time;
         }
-    
+
         // Adjust Volume
         function adjustVolume() {
             video.volume = volumeControl.value;
         }
-    
-        // Toggle Fullscreen
+
         function toggleFullscreen() {
-            if (!document.fullscreenElement) {
-                videoPlayer.requestFullscreen();
-            } else {
-                document.exitFullscreen();
-            }
+    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        if (videoPlayer.requestFullscreen) {
+            videoPlayer.requestFullscreen();
+        } else if (videoPlayer.webkitRequestFullscreen) {
+            videoPlayer.webkitRequestFullscreen(); // For Safari
         }
-    
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen(); // For Safari
+        }
+    }
+}
+
+
         // Skip Forward 10 Seconds
         function skipForward() {
             video.currentTime += 10;
         }
-    
+
         // Skip Backward 10 Seconds
         function skipBackward() {
             video.currentTime -= 10;
         }
-    
+        videoPlayer.addEventListener("click", () => {
+    controls.classList.toggle("hidden");
+});
+
         // Event Listeners
         playPauseBtn.addEventListener("click", togglePlayPause);
         backwardBtn.addEventListener("click", skipBackward);
@@ -331,6 +337,5 @@
         volumeControl.addEventListener("input", adjustVolume);
         fullscreenBtn.addEventListener("click", toggleFullscreen);
     </script>
-    
 </body>
 </html>
