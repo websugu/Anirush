@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Watch Episode</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
@@ -229,7 +231,17 @@
         const gradientOverlay = document.getElementById("gradientOverlay");
         const controls = document.getElementById("controls");
         let controlsTimeout;
-
+    
+        // Lock screen orientation to portrait on mobile
+        if (screen.orientation && screen.orientation.lock) {
+            screen.orientation.lock("portrait").catch((err) => {
+                console.warn("Orientation lock failed:", err);
+            });
+        }
+    
+        // Remove default video player controls
+        video.controls = false;
+    
         // Toggle Controls Visibility
         function showControls() {
             controls.classList.remove("hidden");
@@ -238,23 +250,23 @@
                 if (!video.paused) controls.classList.add("hidden");
             }, 3000);
         }
-
+    
         // Mouse Move Event to Show Controls
         videoPlayer.addEventListener("mousemove", showControls);
-
+    
         // Show Controls When Paused
         video.addEventListener("pause", () => {
             controls.classList.remove("hidden");
             clearTimeout(controlsTimeout);
         });
-
+    
         // Format time in mm:ss
         function formatTime(seconds) {
             const min = Math.floor(seconds / 60);
             const sec = Math.floor(seconds % 60);
             return `${min.toString().padStart(2, "0")}:${sec.toString().padStart(2, "0")}`;
         }
-
+    
         // Play/Pause Toggle
         function togglePlayPause() {
             if (video.paused) {
@@ -267,32 +279,30 @@
                 gradientOverlay.classList.add("visible");
             }
         }
-
-        // Update Progress Bar
-        // Update Progress Bar with Track Fill
-function updateProgressBar() {
-    const progress = (video.currentTime / video.duration) * 100;
-    progressBar.value = progress;
-    const current = formatTime(video.currentTime);
-    const duration = formatTime(video.duration);
-    timeDisplay.textContent = `${current} / ${duration}`;
     
-    // Update the progress bar background to fill as it plays
-    progressBar.style.background = `linear-gradient(to right, #153be7 ${progress}%, #d3d3d3 ${progress}%)`;
-}
-
-
+        // Update Progress Bar
+        function updateProgressBar() {
+            const progress = (video.currentTime / video.duration) * 100;
+            progressBar.value = progress;
+            const current = formatTime(video.currentTime);
+            const duration = formatTime(video.duration);
+            timeDisplay.textContent = `${current} / ${duration}`;
+    
+            // Update the progress bar background to fill as it plays
+            progressBar.style.background = `linear-gradient(to right, #153be7 ${progress}%, #d3d3d3 ${progress}%)`;
+        }
+    
         // Seek Video
         function seekVideo() {
             const time = (progressBar.value / 100) * video.duration;
             video.currentTime = time;
         }
-
+    
         // Adjust Volume
         function adjustVolume() {
             video.volume = volumeControl.value;
         }
-
+    
         // Toggle Fullscreen
         function toggleFullscreen() {
             if (!document.fullscreenElement) {
@@ -301,17 +311,17 @@ function updateProgressBar() {
                 document.exitFullscreen();
             }
         }
-
+    
         // Skip Forward 10 Seconds
         function skipForward() {
             video.currentTime += 10;
         }
-
+    
         // Skip Backward 10 Seconds
         function skipBackward() {
             video.currentTime -= 10;
         }
-
+    
         // Event Listeners
         playPauseBtn.addEventListener("click", togglePlayPause);
         backwardBtn.addEventListener("click", skipBackward);
@@ -321,5 +331,6 @@ function updateProgressBar() {
         volumeControl.addEventListener("input", adjustVolume);
         fullscreenBtn.addEventListener("click", toggleFullscreen);
     </script>
+    
 </body>
 </html>
