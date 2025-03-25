@@ -173,7 +173,8 @@ video {
     }
     
     video {
-       
+        width: 100vw;
+        height: 100vh;
         object-fit: contain; /* Adjust video fit */
     }
 }
@@ -356,13 +357,7 @@ fullscreenBtn.addEventListener("click", toggleFullscreen);
         videoPlayer.addEventListener("click", () => {
     controls.classList.toggle("hidden");
 });
-window.addEventListener("orientationchange", () => {
-    if (window.matchMedia("(orientation: landscape)").matches) {
-        video.style.transform = "rotate(0deg)"; // Normal landscape mode
-    } else {
-        video.style.transform = "rotate(90deg)"; // Rotate for portrait mode
-    }
-});
+
 function isMobileDevice() {
     return /Mobi|Android|iPhone/i.test(navigator.userAgent);
 }
