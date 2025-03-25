@@ -238,7 +238,7 @@
     @media screen and (max-width:575px){
         .anime-container{
         display: grid;
-        grid-template-columns: repeat(auto-fit,minmax(100px, 1fr) );
+        grid-template-columns: repeat(auto-fit,minmax(150px, 1fr) );
         gap: 20px;
         justify-content: center;
     }
