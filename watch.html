@@ -311,6 +311,10 @@ function updateProgressBar() {
         }
 
         function toggleFullscreen() {
+    if (isMobileDevice()) {
+        return; // Prevent fullscreen on mobile
+    }
+
     if (!document.fullscreenElement && !document.webkitFullscreenElement) {
         if (videoPlayer.requestFullscreen) {
             videoPlayer.requestFullscreen();
@@ -318,7 +322,7 @@ function updateProgressBar() {
             videoPlayer.webkitRequestFullscreen(); // For Safari
         }
 
-        // Force Landscape Mode on Mobile
+        // Lock screen orientation to landscape (only on desktop)
         if (screen.orientation && screen.orientation.lock) {
             screen.orientation.lock("landscape").catch(error => console.log("Orientation lock failed:", error));
         }
@@ -329,12 +333,15 @@ function updateProgressBar() {
             document.webkitExitFullscreen();
         }
 
-        // Unlock Screen Orientation
+        // Unlock Screen Orientation (Only on desktop)
         if (screen.orientation && screen.orientation.unlock) {
             screen.orientation.unlock();
         }
     }
 }
+
+// Apply to Fullscreen Button Click
+fullscreenBtn.addEventListener("click", toggleFullscreen);
 
 
 
