@@ -191,7 +191,7 @@ video {
 
     <!-- Video Player -->
     <div id="videoPlayer">
-        <video id="watchVideo" playsinline controlslist="nodownload nofullscreen noremoteplayback"></video>
+        <video id="watchVideo" playsinline webkit-playsinline controlslist="nodownload nofullscreen noremoteplayback"></video>
 
         <!-- Gradient Overlay -->
         <div class="gradient-overlay" id="gradientOverlay">
@@ -317,10 +317,10 @@ function updateProgressBar() {
 
         function toggleFullscreen() {
     if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-        if (videoPlayer.requestFullscreen) {
-            videoPlayer.requestFullscreen();
-        } else if (videoPlayer.webkitRequestFullscreen) {
-            videoPlayer.webkitRequestFullscreen(); // For Safari
+        if (video.requestFullscreen) {
+            video.requestFullscreen();
+        } else if (video.webkitRequestFullscreen) {
+            video.webkitRequestFullscreen(); // For Safari
         }
 
         // Force Landscape Mode on Mobile
@@ -343,6 +343,7 @@ function updateProgressBar() {
 
 
 
+
         // Skip Forward 10 Seconds
         function skipForward() {
             video.currentTime += 10;
@@ -362,6 +363,14 @@ window.addEventListener("orientationchange", () => {
         video.style.transform = "rotate(90deg)"; // Rotate for portrait mode
     }
 });
+function hideAddressBar() {
+    setTimeout(() => {
+        window.scrollTo(0, 1);
+    }, 100);
+}
+
+window.addEventListener("load", hideAddressBar);
+window.addEventListener("orientationchange", hideAddressBar);
 
         // Event Listeners
         playPauseBtn.addEventListener("click", togglePlayPause);
