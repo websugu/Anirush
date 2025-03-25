@@ -310,7 +310,11 @@ function updateProgressBar() {
             video.volume = volumeControl.value;
         }
 
-        function toggleFullscreen() {
+     function isMobileDevice() {
+    return /Mobi|Android|iPhone/i.test(navigator.userAgent);
+}
+
+function toggleFullscreen() {
     if (isMobileDevice()) {
         return; // Prevent fullscreen on mobile
     }
@@ -323,7 +327,7 @@ function updateProgressBar() {
         }
 
         // Lock screen orientation to landscape (only on desktop)
-        if (screen.orientation && screen.orientation.lock) {
+        if (!isMobileDevice() && screen.orientation && screen.orientation.lock) {
             screen.orientation.lock("landscape").catch(error => console.log("Orientation lock failed:", error));
         }
     } else {
@@ -334,11 +338,12 @@ function updateProgressBar() {
         }
 
         // Unlock Screen Orientation (Only on desktop)
-        if (screen.orientation && screen.orientation.unlock) {
+        if (!isMobileDevice() && screen.orientation && screen.orientation.unlock) {
             screen.orientation.unlock();
         }
     }
 }
+
 
 // Apply to Fullscreen Button Click
 fullscreenBtn.addEventListener("click", toggleFullscreen);
@@ -357,7 +362,13 @@ fullscreenBtn.addEventListener("click", toggleFullscreen);
         videoPlayer.addEventListener("click", () => {
     controls.classList.toggle("hidden");
 });
-
+window.addEventListener("orientationchange", () => {
+    if (window.matchMedia("(orientation: landscape)").matches) {
+        video.style.transform = "rotate(0deg)"; // Normal landscape mode
+    } else {
+        video.style.transform = "rotate(90deg)"; // Rotate for portrait mode
+    }
+});
 function isMobileDevice() {
     return /Mobi|Android|iPhone/i.test(navigator.userAgent);
 }
