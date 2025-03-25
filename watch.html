@@ -168,19 +168,14 @@ video {
     cursor: pointer;
 }
 @media (max-width: 768px) {
-    #videoPlayer {
+    .controls, .gradient-overlay {
+        display: none !important; /* Hide custom controls */
+    }
+    
+    video {
         width: 100vw;
         height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background: black;
-    }
-
-    video {
-        width: 100%;
-        height: 100%;
-        object-fit: contain; /* Prevents cropping */
+        object-fit: contain; /* Adjust video fit */
     }
 }
 
@@ -191,7 +186,7 @@ video {
 
     <!-- Video Player -->
     <div id="videoPlayer">
-        <video id="watchVideo" playsinline webkit-playsinline controlslist="nodownload nofullscreen noremoteplayback"></video>
+        <video id="watchVideo" playsinline controlslist="nodownload nofullscreen noremoteplayback"></video>
 
         <!-- Gradient Overlay -->
         <div class="gradient-overlay" id="gradientOverlay">
@@ -317,10 +312,10 @@ function updateProgressBar() {
 
         function toggleFullscreen() {
     if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-        if (video.requestFullscreen) {
-            video.requestFullscreen();
-        } else if (video.webkitRequestFullscreen) {
-            video.webkitRequestFullscreen(); // For Safari
+        if (videoPlayer.requestFullscreen) {
+            videoPlayer.requestFullscreen();
+        } else if (videoPlayer.webkitRequestFullscreen) {
+            videoPlayer.webkitRequestFullscreen(); // For Safari
         }
 
         // Force Landscape Mode on Mobile
@@ -343,7 +338,6 @@ function updateProgressBar() {
 
 
 
-
         // Skip Forward 10 Seconds
         function skipForward() {
             video.currentTime += 10;
@@ -363,14 +357,16 @@ window.addEventListener("orientationchange", () => {
         video.style.transform = "rotate(90deg)"; // Rotate for portrait mode
     }
 });
-function hideAddressBar() {
-    setTimeout(() => {
-        window.scrollTo(0, 1);
-    }, 100);
+function isMobileDevice() {
+    return /Mobi|Android|iPhone/i.test(navigator.userAgent);
 }
 
-window.addEventListener("load", hideAddressBar);
-window.addEventListener("orientationchange", hideAddressBar);
+// If on mobile, remove custom player controls
+if (isMobileDevice()) {
+    document.querySelector(".controls").style.display = "none";
+    document.querySelector(".gradient-overlay").style.display = "none";
+    document.getElementById("watchVideo").controls = true; // Enable native controls
+}
 
         // Event Listeners
         playPauseBtn.addEventListener("click", togglePlayPause);
